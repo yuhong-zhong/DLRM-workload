@@ -56,15 +56,15 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
         -O miniconda3/miniconda.sh
 /usr/bin/bash miniconda3/miniconda.sh -b -u -p miniconda3
 rm -rf miniconda3/miniconda.sh
-conda init zsh
-conda init bash
-conda create --name dlrm_cpu python=3.9 ipython -y
+miniconda3/bin/conda init zsh
+miniconda3/bin/conda init bash
+miniconda3/bin/conda create --name dlrm_cpu python=3.9 ipython -y
 echo "DLRM-SETUP: FINISHED INSTALLING CONDA"
 
-# # Print instructions to be executed before proceeding to part 2. In particular:
-# # (1) For `conda init` to take effect, the shell must be closed and reopened.
-# # (2) `conda activate` is meant to be run in an interactive shell, and might not
-# #     work properly in a shell script.
+# Print instructions to be executed before proceeding to part 2. In particular:
+# (1) For `conda init` to take effect, the shell must be closed and reopened.
+# (2) `conda activate` is meant to be run in an interactive shell, and might not
+#     work properly in a shell script.
 echo ""
 echo ""
 echo "########################################################"
