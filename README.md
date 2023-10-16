@@ -9,7 +9,7 @@ To set up the test environment, run:
 ```bash
 ./dlrm-setup-part1.sh
 
-# Closed and reopen the shell.
+# Close and reopen the shell.
 # Run: conda activate dlrm_cpu
 
 ./dlrm-setup-part2.sh
