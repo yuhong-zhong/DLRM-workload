@@ -17,7 +17,11 @@ echo "########################################################"
 sleep 3
 
 # Restore environment variables indicating paths to different directories.
-source dlrm/paths.export
+EXPORTS_FILE="dlrm/paths.export"
+while read -r LINE
+do
+    export $LINE
+done < "$EXPORTS_FILE"
 
 # Set up env.
 conda install astunparse cffi cmake dataclasses future mkl mkl-include ninja \
@@ -70,6 +74,12 @@ git clone -b pytorch-r1.12-models https://github.com/IntelAI/models.git
 cd models
 export MODELS_PATH=$(pwd)
 echo MODELS_PATH=$MODELS_PATH >> $BASE_PATH/paths.export
+mkdir -p models/recommendation/pytorch/dlrm/product
+# The python scripts will be copied into some directory with the filepath
+# .../reproduce_isca23_cpu_DLRM_inference/models/models/recommendation...
+#
+# The duplication of the 'models' directory is not a mistake. Rather, this is
+# meant to match the filepath used in the testing script.
 cp $DLRM_SYSTEM/dlrm_patches/dlrm_data_pytorch.py \
     models/recommendation/pytorch/dlrm/product/dlrm_data_pytorch.py
 cp $DLRM_SYSTEM/dlrm_patches/dlrm_s_pytorch.py \
@@ -79,7 +89,7 @@ echo "DLRM-SETUP: FINISHED SETTING UP DLRM TEST"
 # Apply the IPEX patch and build IPEX.
 cd $IPEX_PATH
 git apply $DLRM_SYSTEM/dlrm_patches/ipex.patch
-python setup.py install     # The oneDNN library throws some errors if we use the flags provided by the original instructions
+python setup.py install     # The oneDNN library throws some errors if we use the flags provided by the original instructions.
 echo "DLRM-SETUP: FINISHED BUILDING IPEX"
 
 echo "DLRM-SETUP: DONE!

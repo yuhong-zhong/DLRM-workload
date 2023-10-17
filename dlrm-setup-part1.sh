@@ -5,8 +5,8 @@
 # The script does the setup to run the benchmarks in the ISCA 2023 paper:
 # Optimizing CPU Performance for Recommendation Systems At-Scale.
 
-# All changes will be made in this directory, relative to the directory that
-# the script is located in.
+# All setup will be done in this directory, relative to the directory that
+# this script is located in.
 BASE_DIRECTORY_NAME="dlrm"
 
 # Set up base directory.

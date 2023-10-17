@@ -1,0 +1,24 @@
++ export LD_PRELOAD=/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/libiomp5.so:/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/libjemalloc.so
++ LD_PRELOAD=/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/libiomp5.so:/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/libjemalloc.so
++ export MALLOC_CONF=oversize_threshold:1,background_thread:true,metadata_thp:auto,dirty_decay_ms:9000000000,muzzy_decay_ms:9000000000
++ MALLOC_CONF=oversize_threshold:1,background_thread:true,metadata_thp:auto,dirty_decay_ms:9000000000,muzzy_decay_ms:9000000000
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ export KMP_AFFINITY=granularity=fine,compact,1,0
++ KMP_AFFINITY=granularity=fine,compact,1,0
++ export KMP_BLOCKTIME=1
++ KMP_BLOCKTIME=1
++ PyGetCore='import sys; c=int(sys.argv[1]); print(",".join(str(2*i) for i in range(c)))'
++ BOT_MLP=1024-512-256-128
++ TOP_MLP=256-128-64-1
++ ROW=500000
++ DATA_GEN=random
++ for i in {1..1}
+++ python -c 'import sys; c=int(sys.argv[1]); print(",".join(str(2*i) for i in range(c)))' 1
++ C=0
++ numactl -C 0 -m 0 /users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/bin/python -u /users/rw2800/DLRM-workload/dlrm/reproduce_isca23_cpu_DLRM_inference/models/models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py --data-generation=random --round-targets=True --learning-rate=1.0 --arch-mlp-bot=1024-512-256-128 --arch-mlp-top=256-128-64-1 --arch-sparse-feature-size=128 --max-ind-range=40000000 --ipex-interaction --numpy-rand-seed=727 --inference-only --num-batches=128 --data-size 100000000 --num-indices-per-lookup 120 --num-indices-per-lookup-fixed=True --arch-embedding-size 500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000-500000 --print-freq=10 --print-time --mini-batch-size=128 --share-weight-instance=1
++ tee -a log_1s.txt
+/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/python3.9/site-packages/intel_extension_for_pytorch/frontend.py:262: UserWarning: Conv BatchNorm folding failed during the optimize process.
+  warnings.warn("Conv BatchNorm folding failed during the optimize process.")
+/users/rw2800/DLRM-workload/dlrm/miniconda3/envs/dlrm_cpu/lib/python3.9/site-packages/intel_extension_for_pytorch/nn/functional/_embeddingbag.py:12: TracerWarning: torch.Tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  ret = [ret, torch.Tensor(), torch.Tensor(), torch.Tensor()]
