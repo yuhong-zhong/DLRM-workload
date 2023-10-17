@@ -89,7 +89,7 @@ echo "DLRM-SETUP: FINISHED SETTING UP DLRM TEST"
 # Apply the IPEX patch and build IPEX.
 cd $IPEX_PATH
 git apply $DLRM_SYSTEM/dlrm_patches/ipex.patch
-python setup.py install     # The oneDNN library throws some errors if we use the flags provided by the original instructions.
+USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" python setup.py install     # The oneDNN library throws some errors if we use the flags provided by the original instructions.
 echo "DLRM-SETUP: FINISHED BUILDING IPEX"
 
 echo "DLRM-SETUP: DONE!
