@@ -33,8 +33,8 @@ done < "$EXPORTS_FILE"
 # https://intel.github.io/intel-extension-for-pytorch/cpu/latest/tutorials/features.html,
 # auto kernel selection is a feature that enables users to tune for better
 # performance. So turning it off should not affect any functionality.
-sed -i '441s/, auto/) # auto/1' \
-        $MODELS_PATH/models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
+# sed -i '441s/, auto/) # auto/1' \
+#         $MODELS_PATH/models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
 
 # Modify the parameters in $DLRM_SYSTEM/scripts/collect_1s.sh as desired.
 #
